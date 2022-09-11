@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\royne\\source\\repos\\GitProjekt\\Infrastructure\\Infrastructure.csproj": {}
+    "C:\\Users\\royne\\source\\repos\\GitProjekt\\Infrastructure\\Infrastructure.csproj": {}
   },
   "projects": {
-    "c:\\Users\\royne\\source\\repos\\GitProjekt\\Entity\\Entity.csproj": {
+    "C:\\Users\\royne\\source\\repos\\GitProjekt\\Entity\\Entity.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\royne\\source\\repos\\GitProjekt\\Entity\\Entity.csproj",
+        "projectUniqueName": "C:\\Users\\royne\\source\\repos\\GitProjekt\\Entity\\Entity.csproj",
         "projectName": "Entity",
-        "projectPath": "c:\\Users\\royne\\source\\repos\\GitProjekt\\Entity\\Entity.csproj",
+        "projectPath": "C:\\Users\\royne\\source\\repos\\GitProjekt\\Entity\\Entity.csproj",
         "packagesPath": "C:\\Users\\royne\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\royne\\source\\repos\\GitProjekt\\Entity\\obj\\",
+        "outputPath": "C:\\Users\\royne\\source\\repos\\GitProjekt\\Entity\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\royne\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -58,14 +58,14 @@
         }
       }
     },
-    "c:\\Users\\royne\\source\\repos\\GitProjekt\\Infrastructure\\Infrastructure.csproj": {
+    "C:\\Users\\royne\\source\\repos\\GitProjekt\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\royne\\source\\repos\\GitProjekt\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\royne\\source\\repos\\GitProjekt\\Infrastructure\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "c:\\Users\\royne\\source\\repos\\GitProjekt\\Infrastructure\\Infrastructure.csproj",
+        "projectPath": "C:\\Users\\royne\\source\\repos\\GitProjekt\\Infrastructure\\Infrastructure.csproj",
         "packagesPath": "C:\\Users\\royne\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\royne\\source\\repos\\GitProjekt\\Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\royne\\source\\repos\\GitProjekt\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\royne\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -82,8 +82,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "c:\\Users\\royne\\source\\repos\\GitProjekt\\Entity\\Entity.csproj": {
-                "projectPath": "c:\\Users\\royne\\source\\repos\\GitProjekt\\Entity\\Entity.csproj"
+              "C:\\Users\\royne\\source\\repos\\GitProjekt\\Entity\\Entity.csproj": {
+                "projectPath": "C:\\Users\\royne\\source\\repos\\GitProjekt\\Entity\\Entity.csproj"
               }
             }
           }
