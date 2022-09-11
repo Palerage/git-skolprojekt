@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\royne\\source\\repos\\GitProjekt\\Entity\\Entity.csproj": {}
+    "c:\\Users\\royne\\source\\repos\\GitProjekt\\Entity\\Entity.csproj": {}
   },
   "projects": {
-    "C:\\Users\\royne\\source\\repos\\GitProjekt\\Entity\\Entity.csproj": {
+    "c:\\Users\\royne\\source\\repos\\GitProjekt\\Entity\\Entity.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\royne\\source\\repos\\GitProjekt\\Entity\\Entity.csproj",
+        "projectUniqueName": "c:\\Users\\royne\\source\\repos\\GitProjekt\\Entity\\Entity.csproj",
         "projectName": "Entity",
-        "projectPath": "C:\\Users\\royne\\source\\repos\\GitProjekt\\Entity\\Entity.csproj",
+        "projectPath": "c:\\Users\\royne\\source\\repos\\GitProjekt\\Entity\\Entity.csproj",
         "packagesPath": "C:\\Users\\royne\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\royne\\source\\repos\\GitProjekt\\Entity\\obj\\",
+        "outputPath": "c:\\Users\\royne\\source\\repos\\GitProjekt\\Entity\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\royne\\AppData\\Roaming\\NuGet\\NuGet.Config",
