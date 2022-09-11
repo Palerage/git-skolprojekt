@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "8++ARf2GJroqx1bY6VKhBhQjDP5b8hJBqgWE5x/EsZvKIM0zJsR72FvPxZn4SiCyxZCwV17pzOQZKb46iLUy+Q==",
+  "dgSpecHash": "lzoYNjgOCYxPRP53kYFJI9Vd31NNVo346co/0Po3SVGiicfT3UqB3prnExadNfmxAqacPS0yJ6QC2ZFIRcOcbA==",
   "success": true,
-  "projectFilePath": "c:\\Users\\royne\\source\\repos\\GitProjekt\\Infrastructure\\Infrastructure.csproj",
+  "projectFilePath": "C:\\Users\\royne\\source\\repos\\GitProjekt\\Infrastructure\\Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\royne\\.nuget\\packages\\microsoft.data.sqlite.core\\5.0.6\\microsoft.data.sqlite.core.5.0.6.nupkg.sha512",
     "C:\\Users\\royne\\.nuget\\packages\\microsoft.dotnet.platformabstractions\\3.1.6\\microsoft.dotnet.platformabstractions.3.1.6.nupkg.sha512",
