@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Entity;
 using Microsoft.EntityFrameworkCore;
@@ -18,5 +19,12 @@ namespace Infrastructure
         public DbSet<Requirement> Requirements {get; set;}
 
         public DbSet<Learning> Learnings {get; set;}
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        }
     }
 }
