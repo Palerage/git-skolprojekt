@@ -37,8 +37,10 @@ namespace API
             services.AddAutoMapper(typeof(MappingProfiles));
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddControllers();
+
             services.AddDbContext<StoreContext>( x =>{
-                x.UseSqlite(_config.GetConnectionString("DefaultConnection"));
+                x.UseSqlite(_config.GetConnectionString("DefaultConnection"),
+                x => x.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));
             });  
 
             services.AddCors(opt =>{
