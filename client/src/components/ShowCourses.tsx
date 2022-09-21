@@ -2,6 +2,7 @@ import React, { useEffect, useLayoutEffect, useState } from "react";
 import { Card, Col } from "antd";
 import * as FaIcons from "react-icons/fa";
 import { Course } from "../models/course";
+import { Link } from "react-router-dom";
 
 interface Props {
   course: Course;
@@ -42,6 +43,7 @@ const ShowCourses = ({ course }: Props) => {
   return (
     <>
       <Col className="gutter-row" span={spanVal}>
+        <Link to= {`/course/${course.id}`}>
         <Card
           hoverable
           cover={<img width="100%" alt="course-cover" src={course.image} />}
@@ -54,6 +56,7 @@ const ShowCourses = ({ course }: Props) => {
           </div>
           <div className="course__price">{course.price}</div>
         </Card>
+        </Link>
       </Col>
     </>
   );
