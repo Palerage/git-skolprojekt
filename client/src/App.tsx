@@ -5,6 +5,7 @@ import DetailPage from './pages/DetailPage';
 import Homepage from './pages/Homepage';
 import LoginPage from './pages/Login';
 import 'antd/dist/antd.css';
+import Categories from './components/Categories';
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
   return (
     <>
       <Navigation/>
+      <Route exact path="/" component={Categories} />
       <Switch>
         <Route exact path="/" component={Homepage}/>
         <Route exact path="/login" component={LoginPage}/>
