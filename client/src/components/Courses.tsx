@@ -3,10 +3,11 @@ import * as FaIcons from "react-icons/fa";
 import { Row, Col, Card } from 'antd';
 import { Course } from '../models/course';
 import agent from '../actions/agent';
+import { PaginatedCourse } from '../models/paginatedCourse';
 
 const Courses = () =>{
 
-const [courses, setCourses] = useState<Course[]>([])
+const [data, setData] = useState<PaginatedCourse>();
 const [spanVal, setSpanVal] = useState<number>()
 
 const checkWidth = ():void =>{
@@ -29,7 +30,7 @@ useLayoutEffect(() => {
 
 useEffect(() => {
     agent.Courses.list().then((response) => {
-        setCourses(response);
+        setData(response);
         checkWidth();
     });
 }, []);
@@ -51,7 +52,7 @@ const showStars = (rating: number): [] => {
             <h2>New Courses picked just for you...</h2>
         </div>
         <Row gutter={[24,32]}>
-            {courses.map((course: Course, index: number) =>{
+            {data && data.data.map((course: Course, index: number) =>{
                 return (
                     <Col key={index} className='gutter-row' span={spanVal}>
                         <Card
