@@ -5,7 +5,7 @@ import { PaginatedCourse } from "../models/paginatedCourse";
 import { Course } from "../models/course";
 import ShowCourses from "../components/ShowCourses";
 
-const Homepage = () => {
+const HomePage = () => {
   const [data, setData] = useState<PaginatedCourse>();
 
   useEffect(() => {
@@ -30,4 +30,4 @@ const Homepage = () => {
   );
 };
 
-export default Homepage;
+export default HomePage;
