@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import './App.css';
+//import './App.css';
 import './sass/main.scss';
 import Navigation from './components/Navigation';
 import 'antd/dist/antd.css';
@@ -9,7 +9,7 @@ import Login from './pages/LoginPage';
 import DetailPage from './pages/DetailPage';
 import Categories from './components/Categories';
 import CategoryPage from './pages/CategoryPage';
-import ContactPage from './contact/ContactPage';
+//import ContactPage from './contact/ContactPage';
 import DescriptionPage from './pages/DescriptionPage';
 import BasketPage from './pages/BasketPage';
 import { useStoreContext } from './context/StoreContext';
@@ -40,7 +40,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/course/:id" component={DescriptionPage} />
-        <Route exact path="/contact" component={ContactPage} />
+        
         <Route exact path="/basket" component={BasketPage} />
         <Route exact path="/category/:id" component={CategoryPage} />
         <Route exact path="/login" component={Login} />
