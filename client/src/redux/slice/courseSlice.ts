@@ -20,6 +20,17 @@ import {
       console.log(err);
     }
   });
+
+  export const getCourseAsync = createAsyncThunk<
+  Course | undefined,
+  {courseId: string}
+>("course/getCourseAsync", async ({courseId}) => {
+  try {
+    return await agent.Courses.getById(courseId);
+  } catch (err) {
+    console.log(err);
+  }
+});
   
   export const courseSlice = createSlice({
     name: "course",
@@ -38,6 +49,17 @@ import {
         state.coursesLoaded = true;
       });
       builder.addCase(getCoursesAsync.rejected, (state) => {
+        state.status = "idle";
+      });
+      //COURSE
+      builder.addCase(getCourseAsync.pending, (state) => {
+        state.status = "pending";
+      });
+      builder.addCase(getCourseAsync.fulfilled, (state, action) => {
+        coursesAdapter.upsertOne(state, action.payload!);
+        state.status = "idle";
+      });
+      builder.addCase(getCourseAsync.rejected, (state) => {
         state.status = "idle";
       });
     },
