@@ -5,7 +5,7 @@ import './sass/main.scss';
 import Navigation from './components/Navigation';
 import 'antd/dist/antd.css';
 import HomePage from './pages/Homepage';
-import Login from './pages/LoginPage';
+import Login from './pages/Login';
 import DetailPage from './pages/DetailPage';
 import Categories from './components/Categories';
 import CategoryPage from './pages/CategoryPage';
