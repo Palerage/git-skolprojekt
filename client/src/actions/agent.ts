@@ -21,13 +21,13 @@ const requests = {
 const Courses = {
   list: (params?: URLSearchParams) =>
     requests.get<PaginatedCourse>("courses", params),
-  getById: (id: string) => requests.get<Course>(`courses/${id}`),
+  getById: (id: string) => requests.get<Course>(`/courses/${id}`),
 };
 
 const Categories = {
   list: (params?: URLSearchParams) =>
     requests.get<Category[]>("categories", params),
-  getCategory: (id: number) => requests.get<Category>(`categories/${id}`),
+  getCategory: (id: number) => requests.get<Category>(`/categories/${id}`),
 };
 
 const Baskets = {
