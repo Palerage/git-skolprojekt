@@ -37,7 +37,12 @@ const Navigation = () => {
                 </li>
 
                 <li className="nav-menu-items__header">Navigation</li>
-                <li>Home</li>
+                <Link to= "/">
+                  <li>Home</li>
+                </Link>
+                <Link to="/login">
+                  <li>Login</li>                
+                </Link> 
               </ul>
             </nav>
           </div>
@@ -46,6 +51,9 @@ const Navigation = () => {
           <ul className="nav__left__list">
             <Link to="/">
               <li className="nav__left__list__item">Home</li>
+            </Link>
+            <Link to="/login">
+              <li className="nav__left__list__item">Login</li>
             </Link>
           </ul>
         </div>
