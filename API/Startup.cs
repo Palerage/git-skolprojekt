@@ -14,6 +14,7 @@ using API.Middleware;
 using API.ErrorResponse;
 using Entity;
 using Microsoft.AspNetCore.Identity;
+using Infrastructure.Services;
 
 namespace API
 {
@@ -38,6 +39,7 @@ namespace API
             .AddEntityFrameworkStores<StoreContext>();
             services.AddAuthentication();
             services.AddAuthorization();
+            services.AddScoped<TokenService>();
             services.AddScoped<ICourseRepository, CourseRepository>();
             services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepository<>)));
             services.AddAutoMapper(typeof(MappingProfiles));
