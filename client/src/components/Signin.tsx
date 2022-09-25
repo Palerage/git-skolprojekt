@@ -1,23 +1,32 @@
-import { Button, Card, Form, Input, Typography } from "antd";
+import { Button, Card, Form, Input, notification, Typography } from "antd";
 import { Content } from "antd/lib/layout/layout";
 import { ChangeEvent, SyntheticEvent, useState } from "react";
-import agent from "../actions/agent";
 import { Login } from "../models/user";
-
-interface Props{
-    toggleRegister: () => void
-}
+import { signInUser } from "../redux/slice/userSlice";
+import { useAppDispatch } from "../redux/store/configureStore";
 
 const { Text, Title } = Typography;
 
-const Signin = ({toggleRegister} : Props) => {
-  const [values, setValues] = useState<Login>
-    ({
-      email: "",
-      password: "",
-    });
+interface Props {
+  toggleRegister: () => void;
+}
+
+const Signin = ({ toggleRegister }: Props) => {
+  const [values, setValues] = useState<Login>({
+    email: "",
+    password: "",
+  });
+
+  const dispatch = useAppDispatch();
 
   const { email, password } = values;
+
+  const [form] = Form.useForm();
+
+  const resetForm = () => {
+    setValues({ ...values, email: "", password: "" });
+    form.resetFields();
+  };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -26,10 +35,16 @@ const Signin = ({toggleRegister} : Props) => {
 
   const submitUser = async (e: SyntheticEvent) => {
     e.preventDefault();
-    if (email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/) && password.length >= 6) {
-      const response = await agent.Users.login(values);
-      setValues({ ...values, email: "", password: "" });
-      console.log(response);
+    try {
+      if (email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/) && password.length >= 6) {
+        await dispatch(signInUser(values));
+      }
+      resetForm();
+    } catch (err: any) {
+      notification.error({
+        message: "Please check your email or password",
+      });
+      resetForm();
     }
   };
 
@@ -50,7 +65,10 @@ const Signin = ({toggleRegister} : Props) => {
             labelCol={{ span: 8 }}
             wrapperCol={{ span: 16 }}
             autoComplete="off"
-            onSubmitCapture={submitUser}
+            // onSubmitCapture={submitUser}
+            initialValues={values}
+            onFinish={submitUser}
+            form={form}
           >
             <Form.Item
               label="Email"
@@ -90,7 +108,9 @@ const Signin = ({toggleRegister} : Props) => {
             </Form.Item>
           </Form>
         </Content>
-        <div onClick={toggleRegister} className="log-in-card__toggle">Not a user yet? Register here</div>
+        <div onClick={toggleRegister} className="log-in-card__toggle">
+          Not a user yet? Register here
+        </div>
       </Card>
     </>
   );
