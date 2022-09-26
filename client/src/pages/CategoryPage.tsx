@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import agent from "../actions/agent";
 import { Row } from "antd";
-
 import { useParams } from "react-router";
 import ShowCourses from "../components/ShowCourses";
 import { Course } from "../models/course";
