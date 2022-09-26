@@ -1,27 +1,77 @@
 import {
-    CardCvcElement,
-    CardExpiryElement,
-    CardNumberElement,
-  } from "@stripe/react-stripe-js";
-  import { Card, Form, Input } from "antd";
-  import { ChangeEvent, useState } from "react";
-  import CheckoutSummary from "./CheckoutSummary";
-  
-  const Checkout = () => {
-    const [cardName, setCardName] = useState <string>("");
-  
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-      setCardName(e.target.value);
-    };
-  
-    const [form] = Form.useForm();
-  
-    return (
+  CardCvcElement,
+  CardExpiryElement,
+  CardNumberElement,
+  useElements,
+  useStripe,
+} from "@stripe/react-stripe-js";
+import { Card, Form, Input, notification } from "antd";
+import { SyntheticEvent, useState } from "react";
+import { useHistory } from "react-router-dom";
+import CheckoutSummary from "../components/CheckoutSummary";
+import { removeBasket } from "../redux/slice/basketSlice";
+import { useAppDispatch, useAppSelector } from "../redux/store/configureStore";
+
+const Checkout = () => {
+  const [cardName, setCardName] = useState<string>("");
+
+  const [form] = Form.useForm();
+
+  const stripe = useStripe();
+  const elements = useElements();
+
+  const dispatch = useAppDispatch();
+  const history = useHistory();
+
+  const { basket } = useAppSelector((state) => state.basket);
+
+  const handleChange = (e: any) => {
+    setCardName(e.target.value);
+  };
+
+  const handlePayment = async (event: SyntheticEvent) => {
+    event.preventDefault();
+    if (!stripe || !elements) return;
+
+    try {
+      const cardElement = elements.getElement(CardNumberElement);
+
+      const paymentResult = await stripe.confirmCardPayment(
+        basket?.clientSecret!,
+        {
+          payment_method: {
+            card: cardElement!,
+            billing_details: {
+              name: cardName,
+            },
+          },
+        }
+      );
+      if (paymentResult.paymentIntent?.status === "succeeded") {
+        notification.success({
+          message: "Your payment is successful",
+        });
+        dispatch(removeBasket());
+        setTimeout(() => {
+          history.push("/profile");
+        }, 1000);
+      } else {
+        notification.error({
+          message: paymentResult.error?.message!,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return (
+    <>
       <div className="checkout">
         <div className="checkout__form">
           <h1>Checkout Page</h1>
           <Card title="Fill your Card details here">
-            <Form form={form} layout="vertical">
+            <Form name="payment" form={form} layout="vertical">
               <Form.Item
                 name="cardName"
                 rules={[
@@ -31,9 +81,9 @@ import {
               >
                 <Input
                   name="cardName"
-                  placeholder="Mention the name on your card"
-                  value={cardName}
                   onChange={handleChange}
+                  value={cardName}
+                  placeholder="Mention the name on your card"
                 />
               </Form.Item>
               <Form.Item label="Card Number">
@@ -60,7 +110,8 @@ import {
           <CheckoutSummary />
         </div>
       </div>
-    );
-  };
-  
-  export default Checkout;
+    </>
+  );
+};
+
+export default Checkout;
