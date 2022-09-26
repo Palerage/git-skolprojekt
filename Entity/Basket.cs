@@ -10,24 +10,31 @@ namespace Entity
 
         public string ClientId { get; set; }
 
+        public List<BasketItem> Items { get; set; } = new List<BasketItem>();
+
         public string PaymentIntentId { get; set; }
 
         public string ClientSecret { get; set; }
 
-        public List<BasketItem> Items { get; set; } = new List<BasketItem>();
-
-        public void AddCourseItem(Course course)
+        public void AddCourse(Course course)
         {
             if(Items.All(item => item.CourseId != course.Id))
             {
-                    Items.Add(new BasketItem{Course = course});
+                 Items.Add(new BasketItem{Course = course});
             }
         }
 
-        public void RemoveCourseItem(Guid courseId)
+        public void RemoveCourse(Guid courseId)
         {
             var course = Items.FirstOrDefault(item => item.CourseId == courseId);
             Items.Remove(course);
+        }
+
+        public void ClearBasket()
+        {
+            PaymentIntentId = null;
+            ClientSecret = null;
+            Items.Clear();
         }
     }
 }
