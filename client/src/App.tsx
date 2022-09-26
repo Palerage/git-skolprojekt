@@ -14,16 +14,16 @@ import BasketPage from './pages/BasketPage';
 import { useAppDispatch } from './redux/store/configureStore'; 
 import { fetchBasketAsync } from './redux/slice/basketSlice';
 import Dashboard from './pages/Dashboard';
-import { getUser } from './redux/slice/userSlice';
 import PrivateRoute from './components/PrivateRoute';
 import CheckoutWrapper from './pages/CheckoutPage';
+import { fetchCurrentUser } from './redux/slice/userSlice';
 
 function App() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    dispatch(fetchCurrentUser())
     dispatch(fetchBasketAsync());
-    dispatch(getUser())
   }, [dispatch]);
   return (
     <>
