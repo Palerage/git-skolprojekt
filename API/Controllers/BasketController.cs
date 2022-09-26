@@ -47,7 +47,7 @@ namespace API.Controllers
 
             if (course == null) return NotFound(new ApiResponse(404));
 
-            basket.AddCourseItem(course);
+            basket.AddCourse(course);
 
             var basketResponse = _mapper.Map<Basket, BasketDto>(basket);
 
@@ -65,7 +65,7 @@ namespace API.Controllers
 
             if (basket == null) return NotFound();
 
-            basket.RemoveCourseItem(courseId);
+            basket.RemoveCourse(courseId);
 
             var result = await _context.SaveChangesAsync() > 0;
 
@@ -74,17 +74,32 @@ namespace API.Controllers
             return BadRequest(new ApiResponse(400, "Problem removing item from the basket"));
         }
 
+        [HttpDelete("clear")]
+          public async Task<ActionResult> RemoveBasket()
+        {
+            var basket = await ExtractBasket(GetClientId());
+
+            if (basket == null) return NotFound();
+
+            basket.ClearBasket();
+
+            var result = await _context.SaveChangesAsync() > 0;
+
+            if (result) return Ok();
+
+              return BadRequest(new ApiResponse(400, "Problem clearing the basket"));
+
+        }
+
         private Basket CreateBasket()
         {
             var clientId = User.Identity?.Name;
-
             if(string.IsNullOrEmpty(clientId))
             {
-                clientId = Guid.NewGuid().ToString();
-                var options = new CookieOptions { IsEssential = true, Expires = DateTime.Now.AddDays(10) };
-                Response.Cookies.Append("clientId", clientId, options);
+            clientId = Guid.NewGuid().ToString();
+            var options = new CookieOptions { IsEssential = true, Expires = DateTime.Now.AddDays(10) };
+            Response.Cookies.Append("clientId", clientId, options);
             }
-            
             var basket = new Basket { ClientId = clientId };
             _context.Basket.Add(basket);
             return basket;
@@ -92,13 +107,11 @@ namespace API.Controllers
 
         private async Task<Basket> ExtractBasket(string clientId)
         {
-
             if(string.IsNullOrEmpty(clientId))
             {
                 Response.Cookies.Delete("clientId");
                 return null;
             }
-
             return await _context.Basket
                         .Include(b => b.Items)
                         .ThenInclude(i => i.Course)
@@ -107,7 +120,8 @@ namespace API.Controllers
 
         }
 
-        private string GetClientId(){
+        private string GetClientId()
+        {
             return User.Identity?.Name ?? Request.Cookies["clientId"];
         }
 
