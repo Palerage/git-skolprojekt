@@ -1,23 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 //import './index.css';
 import App from './App';
 //import reportWebVitals from './reportWebVitals';
 import { StoreProvider } from './context/StoreContext';
+import { Provider } from 'react-redux';
 import { store } from './redux/store/configureStore';
+import { axiosInterceptor } from './actions/agent';
 
+axiosInterceptor(store);
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Router>
-      <StoreProvider>
-        <Provider store = {store}>
+  <Router>
+    <StoreProvider>
+      <Provider store={store}>
         <App />
-        </Provider>
-      </StoreProvider>
-    </Router>
-  </React.StrictMode>,
+      </Provider>
+    </StoreProvider>
+  </Router>,
   document.getElementById('root'),
 );

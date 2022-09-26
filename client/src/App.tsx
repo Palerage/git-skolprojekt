@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
-//mport './App.css';
+//import './App.css';
 import './sass/main.scss';
 import Navigation from './components/Navigation';
 import 'antd/dist/antd.css';
@@ -16,7 +16,7 @@ import { fetchBasketAsync } from './redux/slice/basketSlice';
 import Dashboard from './pages/Dashboard';
 import { getUser } from './redux/slice/userSlice';
 import PrivateRoute from './components/PrivateRoute';
-import CheckoutPage from './pages/CheckoutPage';
+import CheckoutWrapper from './pages/CheckoutPage';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -37,7 +37,7 @@ function App() {
         <Route exact path="/login" component={Login} />
         <Route exact path="/detail" component={DetailPage} />
         <PrivateRoute exact path="/profile" component={Dashboard} />
-        <PrivateRoute exact path="/checkout" component={CheckoutPage} />
+        <PrivateRoute exact path="/checkout" component={CheckoutWrapper} />
       </Switch>
     </>
   );
