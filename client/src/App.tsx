@@ -18,6 +18,7 @@ import PrivateRoute from './components/PrivateRoute';
 import CheckoutWrapper from './pages/CheckoutPage';
 import { fetchCurrentUser } from './redux/slice/userSlice';
 import Loading from './components/Loading';
+import CoursePage from './pages/CoursePage';
 
 function App() {
 
@@ -51,6 +52,7 @@ function App() {
         <Route exact path="/login" component={Login} />
         <Route exact path="/detail" component={DetailPage} />
         <PrivateRoute exact path="/profile" component={Dashboard} />
+        <PrivateRoute exact path="/learn/:course/:lecture" component={CoursePage} />
         <PrivateRoute exact path="/checkout" component={CheckoutWrapper} />
       </Switch>
     </>
