@@ -1,70 +1,71 @@
-import { createAsyncThunk, createSlice, isAnyOf } from "@reduxjs/toolkit";
-import { notification } from "antd";
-import { access, accessSync, stat } from "fs";
-import { isGetAccessor } from "typescript";
-import agent from "../../actions/agent";
-import { Course } from "../../models/course";
-import { Login, Register, User } from "../../models/user";
-import { setBasket } from "./basketSlice";
+import { createAsyncThunk, createSlice, isAnyOf } from '@reduxjs/toolkit';
+import { notification } from 'antd';
+import agent from '../../actions/agent';
+import { Course } from '../../models/course';
+import { Login, Register, User } from '../../models/user';
+import { setBasket } from './basketSlice';
 
 interface UserState {
   user: User | null;
-  userCourses: Course[]
+  userCourses: Course[];
+  unpublishedCourses: Course[]
 }
 
 const initialState: UserState = {
   user: null,
-  userCourses: []
+  userCourses: [],
+  unpublishedCourses: []
 };
 
 export const fetchCurrentUser = createAsyncThunk<User>(
-  "user/fetchCurrentUser",
+  'user/fetchCurrentUser',
   async (_, thunkAPI) => {
-    thunkAPI.dispatch(setUser(JSON.parse(localStorage.getItem("user")!)))
-    try{
-      const userDto = await agent.Users.currentUser()
-      const {basket, courses, ...user} = userDto;
-      if(basket) thunkAPI.dispatch(setBasket(basket))
-      if(courses) thunkAPI.dispatch(setUserCourses(courses))
-      localStorage.setItem("user", JSON.stringify(user))
+    thunkAPI.dispatch(setUser(JSON.parse(localStorage.getItem('user')!)));
+    try {
+      const userDto = await agent.Users.currentUser();
+      const { basket, courses, ...user } = userDto;
+      if (basket) thunkAPI.dispatch(setBasket(basket));
+      if (courses) thunkAPI.dispatch(setUserCourses(courses));
+      localStorage.setItem('user', JSON.stringify(user));
       return user;
-    }catch(error: any){
-      return thunkAPI.rejectWithValue({error: error})
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue({ error: error.data });
     }
   },
   {
-    condition: () =>{
-      if(!localStorage.getItem("user")) return false;
-    }
-  }
+    condition: () => {
+      if (!localStorage.getItem('user')) return false;
+    },
+  },
 );
 
 export const signInUser = createAsyncThunk<User, Login>(
-  "user/signin",
+  'user/signin',
   async (data, thunkAPI) => {
     try {
       const userData = await agent.Users.login(data);
-      const { basket, ...user } = userData;
+      const { basket, courses, ...user } = userData;
       if (basket) thunkAPI.dispatch(setBasket(basket));
-      localStorage.setItem("user", JSON.stringify(user));
+      if (courses) thunkAPI.dispatch(setUserCourses(courses));
+      localStorage.setItem('user', JSON.stringify(user));
       return user;
     } catch (err: any) {
       return thunkAPI.rejectWithValue({ error: err });
     }
-  }
+  },
 );
 
 export const registerUser = createAsyncThunk<User, Register>(
-  "user/register",
+  'user/register',
   async (data, thunkAPI) => {
     try {
       const user = await agent.Users.register(data);
-      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem('user', JSON.stringify(user));
       return user;
     } catch (err: any) {
       return thunkAPI.rejectWithValue({ error: err });
     }
-  }
+  },
 );
 
 export const addRole = createAsyncThunk<void>(
@@ -72,57 +73,79 @@ export const addRole = createAsyncThunk<void>(
   async (_, thunkAPI) => {
     try {
       await agent.Users.addRole();
-    } catch (err) {
-      return thunkAPI.rejectWithValue({ error: err })
+    } catch (err: any) {
+      return thunkAPI.rejectWithValue({ error: err });
+    }
+  },
+);
+
+export const getUnpublishedCourses = createAsyncThunk<Course[]>(
+  'user/getUnpublishedCourses',
+  async (_, thunkAPI) => {
+    try {
+     return await agent.Users.unpublishedCourses();
+    } catch (err: any) {
+      return thunkAPI.rejectWithValue({ error: err });
     }
   },
 );
 
 export const userSlice = createSlice({
-  name: "user",
+  name: 'user',
   initialState,
   reducers: {
     signOut: (state) => {
       state.user = null;
-      localStorage.removeItem("user");
+      localStorage.removeItem('user');
     },
     setUser: (state, action) => {
       let claims = JSON.parse(atob(action.payload.token.split('.')[1]));
-      let roles = claims['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+      let roles =
+        claims['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
       state.user = {
         ...action.payload,
-        roles: typeof roles === 'string' ? [roles] : roles
-      }
+        roles: typeof roles === 'string' ? [roles] : roles,
+      };
     },
-    setUserCourses: (state, action) =>{
+    setUserCourses: (state, action) => {
       state.userCourses = action.payload;
-    }
+    },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchCurrentUser.rejected, (state) =>{
+    builder.addCase(fetchCurrentUser.rejected, (state) => {
       state.user = null;
-      localStorage.removeItem("user");
+      localStorage.removeItem('user');
       notification.error({
-        message: "Session has been expired..."
-      })
+        message: 'Session has been expired',
+      });
     });
+     builder.addCase(getUnpublishedCourses.fulfilled, (state, action) => {
+      state.unpublishedCourses = action.payload
+     });
     builder.addMatcher(
-      isAnyOf(signInUser.fulfilled, registerUser.fulfilled, fetchCurrentUser.fulfilled),
+      isAnyOf(
+        signInUser.fulfilled,
+        registerUser.fulfilled,
+        fetchCurrentUser.fulfilled,
+      ),
       (state, action) => {
         let claims = JSON.parse(atob(action.payload.token.split('.')[1]));
-        let roles = claims['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+        let roles =
+          claims[
+            'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
+          ];
         state.user = {
-        ...action.payload,
-        roles: typeof roles === 'string' ? [roles] : roles,
-      }
-      }
-    );    
+          ...action.payload,
+          roles: typeof roles === 'string' ? [roles] : roles,
+        };
+      },
+    );
     builder.addMatcher(
       isAnyOf(signInUser.rejected, registerUser.rejected),
       (state, action) => {
         throw action.payload;
-      }
-    );    
+      },
+    );
   },
 });
 
