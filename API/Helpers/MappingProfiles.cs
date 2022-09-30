@@ -16,6 +16,8 @@ namespace API.Helpers
             CreateMap<Learning, LearningDto>();
 
             CreateMap<Category, CategoriesDto>();
+
+            CreateMap<Category, CategoryDto>();
             
             CreateMap<Basket, BasketDto>();
 
