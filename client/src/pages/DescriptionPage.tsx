@@ -19,6 +19,10 @@ const DescriptionPage = () => {
     if(!course) dispatch(getCourseAsync({courseId: id}))
   }, [id, dispatch, course]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const getParsedDate = (strDate: any) => {
     let strSplitDate = String(strDate).split(" ");
     let date: any = new Date(strSplitDate[0]);
@@ -160,9 +164,6 @@ const DescriptionPage = () => {
                 Add to cart
               </div>
             )}
-            <div className="description-page__sidebar__box__button--text">
-              Book now
-            </div>
           </div>
         </div>
         <div className="description-page__sidebar__body">

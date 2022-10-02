@@ -1,23 +1,35 @@
 .log-in {
     display: flex;
-    align-items: center;
+    align-items:center;
     justify-content: center;
-    background-color: $color-primary-dark;
+    background-color: $color-grey-light-1;
     height: 100vh;
   
     &__form {
       display: flex;
+      align-items: center;
       justify-content: center;
       margin-top: 30px;
     }
   }
   
   .log-in-card {
-    width: 500px;
-    text-align: center;
-    padding: 10px 0 20px;
+    margin: 60px 0px;
+    padding: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    animation: mymove 5s infinite;
+
+    @keyframes mymove {
+      0% {background-color: $banner-accent}
+      50% {background-color: $banner-accent-2}
+      100% {background-color: $banner-accent}
+    }
   
     &__toggle {
+      margin-top: 40px;
+      text-align: center;
       color: $color-primary-dark;
       font-weight: bold;
   
@@ -32,3 +44,6 @@
   .log-in-card__intro-title.ant-typography + h3.ant-typography {
     margin-top: 5px;
   }
+.ant-row {
+  text-align: center;
+}

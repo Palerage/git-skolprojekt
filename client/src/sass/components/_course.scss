@@ -1,21 +1,66 @@
 .course {
   display: flex;
   flex-direction: column;
-  padding: 50px 20px;
+  padding: 10px;
   max-width: 1340px;
-  margin: 10px auto 0;
+  margin: auto;
 
   &__header {
+    margin: 60px 0px;
+    padding: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    animation: mymove 5s infinite;
+
+    @keyframes mymove {
+      0% {background-color: $banner-accent}
+      50% {background-color: $banner-accent-2}
+      100% {background-color: $banner-accent}
+    }
+
     & h1 {
-      font-size: 40px;
-      font-weight: bold;
+      font-family: $font-primary; 
+      font-size: 48px;
+      color: $color-grey-light-1;
     }
 
     & h2 {
-      font-size: 25px;
-      font-weight: bold;
+      font-size: 22px;
+      letter-spacing: 3px;
+      color: $color-grey-light-1;
     }
-  }
+
+    & img{
+      position: absolute;
+      height: 250px;
+      bottom: 0;
+      right: 0;
+      margin-right: 5%;      
+    }
+    @media only screen and (max-width: $bp-medium) {
+
+      &__header{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 20px 0px;
+      }
+
+      & img{
+        display: none;
+      }
+      & h1 {
+        font-size: 32px;
+        text-align: center;
+      }
+      & h2 {
+        font-size: 16px;
+        letter-spacing: 3px;
+        text-align: center;
+      }
+    }
+  } 
 
   &__title {
     margin-top: 5px;
@@ -50,14 +95,10 @@
     }
   }
 
-  & > * {
-    margin: 20px;
-  }
-
   &__bottom {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: flex-end;
 
     @media only screen and (max-width: $bp-small) {
       flex-direction: column;

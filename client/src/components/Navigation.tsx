@@ -91,7 +91,7 @@ const Navigation = () => {
             <input
               type="text"
               className="nav__right__search__input"
-              placeholder="Search Courses..."
+              placeholder="Search..."
               value={searchText}
               onChange={handleChange}
             />

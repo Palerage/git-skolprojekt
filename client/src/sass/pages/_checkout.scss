@@ -1,15 +1,19 @@
 .checkout {
-    display: flex;
-    max-width: 1440px;
-    margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  max-width: 1340px;
+  margin: auto;
+  margin-top: 40px;
   
     & .ant-input::placeholder {
       color: $color-grey-dark-1;
     }
   
     & h1 {
-      font-weight: bold;
-      margin-left: 10px;
+      font-family: $font-primary; 
+      font-size: 30px;
+      color: $color-grey-light-1;
     }
   
     @media only screen and (max-width: $bp-medium) {
@@ -17,10 +21,18 @@
     }
   
     &__form {
-      display: flex;
-      flex-direction: column;
-      flex: 0 0 60%;
-      padding: 20px;
+      margin: 60px 0px;
+    padding: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    animation: mymove 5s infinite;
+
+    @keyframes mymove {
+      0% {background-color: $banner-accent}
+      50% {background-color: $banner-accent-2}
+      100% {background-color: $banner-accent}
+    }
     }
   
     &__summary {
