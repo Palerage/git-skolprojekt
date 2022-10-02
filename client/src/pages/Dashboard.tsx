@@ -29,8 +29,7 @@ const Dashboard = () => {
           </Button>
         )}
       </div>
-      <div className="dashboard__courses">
-        <Row gutter={[48, 32]}>
+      <div className="course_cards">
           {userCourses.length > 0 ? (
             userCourses.map((course: Course, index: number) => {
               return <ShowCourses key={index} course={course} />;
@@ -38,9 +37,8 @@ const Dashboard = () => {
           ) : (
             <h1>You have not bought any courses!</h1>
           )}
-        </Row>
       </div>
-    </div>
+      </div>
   );
 };
 

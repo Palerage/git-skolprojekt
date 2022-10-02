@@ -4,6 +4,7 @@
     display: flex;
     width: 100%;
     justify-content: center;
+    align-items: center;
     overflow: hidden;
     padding: 0 10px;
     box-shadow: $shadow-light;
@@ -19,6 +20,7 @@
     &__name {
       color: black;
       font-weight: bold;
+      font-family: $font-primary, sans-serif;   
   
       &:hover {
         text-decoration: underline;  

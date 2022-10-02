@@ -1,4 +1,4 @@
-$font-primary: "Lato";
+$font-primary: 'Poppins', sans-serif;
 
 // RESPONSIVE BREAKPOINTS
 $bp-largest: 75em; // 1200px
@@ -9,8 +9,12 @@ $bp-small: 37.5em; // 600px;
 // Colors
 $color-grey-light-1: #f9f7f6;
 $color-grey-light-2: #aaa;
-$color-grey-dark-1: #54483a;
-$color-grey-dark-2: #6d5d4b;
+$color-grey-dark-1: #252525;
+$color-grey-dark-2: #484848;
+
+$banner-accent: rgb(43, 147, 203);
+$banner-accent-2: rgb(149, 198, 224);
+$banner-accent-3: rgb(59, 75, 126);
 
 $color-primary: #261e7d;
 $color-primary-dark: #0e0545;
@@ -28,10 +32,14 @@ $border-dark: 2px solid #f4f2f2;
 $shadow-dark: 0 2rem 6rem rgba(0, 0, 0, 0.3);
 $shadow-light: 0 2rem 5rem rgba(0, 0, 0, 0.06);
 
-html{
+* {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
-
 body{
-    font-family: $font-primary, sans-serif;
+    width: 100%;
+    min-height: 100vh;
+    padding-top: 20px;
+    font-family: $font-primary;
 }

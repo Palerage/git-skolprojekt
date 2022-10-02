@@ -49,7 +49,7 @@ const BasketPage = () => {
   ]
 
   return (
-    <>
+    <div>
       <div className="basket-page">
         <h1 className="basket-page__header">Shopping Cart</h1>
         <h2 className="basket-page__sub-header">
@@ -59,7 +59,7 @@ const BasketPage = () => {
         </h2>
         <div className="basket-page__body">
           <div className="basket-page__body__table">
-            <Table
+            <Table 
               columns={columns}
               dataSource={basket?.items}
               rowKey="courseId"
@@ -82,7 +82,7 @@ const BasketPage = () => {
           )}
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
