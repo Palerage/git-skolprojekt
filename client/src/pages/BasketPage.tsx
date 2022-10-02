@@ -13,14 +13,14 @@ const BasketPage = () => {
   const total = basket?.items.reduce((sum, item) => sum + item.price, 0)
 
   const columns = [
-    {
-      title: 'Image',
-      dataIndex: 'image',
-      key: 'image',
-      render: (url: string) => {
-        return <img width="100px" src={url} alt={url} />
-      },
-    },
+    // {
+    //   title: 'Image',
+    //   dataIndex: 'image',
+    //   key: 'image',
+    //   render: (url: string) => {
+    //     return <img width="100px" src={url} alt={url} />
+    //   },
+    // },
     {
       title: 'Title',
       dataIndex: 'title',
